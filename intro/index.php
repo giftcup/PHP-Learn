@@ -54,11 +54,11 @@
 
         /* LOOPS */
         while ($a <= 10) {
-            echo "Loop number " . $a++;
+            echo " " . $a++;
         }
 
         do {
-            echo "Loop number " . $b++;
+            echo " " . $b++;
         } while(b <= 5);
 
         for ($i = 0; $i < 4; $i++) {
