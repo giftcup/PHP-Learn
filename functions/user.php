@@ -1,8 +1,10 @@
 <?php
     // avoid echoing out values in functions
     function calcAdd($num1, $num2) {
-        $value = $num1 + $num2;
-        return $value;
+        $GLOBALS['num'] = $num1 + $num2; // changes the value of a global variable from within a function
+        return $GLOBALS['num'];
     }
-
-    echo calcAdd(2, 4);
+    $num = 9;
+    echo "<br>".$num;
+    echo "<br>".calcAdd(2, 4);
+    echo "<br>".$num;
