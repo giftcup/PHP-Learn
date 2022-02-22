@@ -1,7 +1,3 @@
-<?php 
-    include_once './includes/database.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,42 +7,40 @@
 </head>
 <body>
 
- <?php
-    $data = "Admin";
-    $sql = "SELECT * FROM users WHERE user_uid=?;";
+    <form action="includes/signup.php" method="POST">
+        <input type="text" name="first" placeholder="Firstname">
+        <br>
+        <input type="text" name="last" placeholder="Lastname">
+        <br>
+        <input type="text" name="email" placeholder="E-mail">
+        <br>
+        <input type="text" name="uid" placeholder="Username">
+        <br>
+        <input type="password" name="pwd" placeholder="Password">
+        <br>
+        <button type="submit" name="submit">Signup</button>
+    </form>
 
-    // Create a prepared statement
-    $stmt = mysqli_stmt_init($conn);
-    //Prepare the prepared statement
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        echo "SQL statement failed";
-    }
-    else {
-        // Bind parameters to the placeholders
-        mysqli_stmt_bind_param($stmt, "s", $data);
-        // Run parameters inside database
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo $row['user_first']. "<br>";
+    <?php 
+        $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+        if (strpos($fullUrl, "signup=empty") == true) {
+            echo "<p>You did not fill in all fields!</p>";
+            exit();
         }
-    }
-    mysqli_close($conn);
-?>
-
-<form action="includes/signup.php" method="POST">
-    <input type="text" name="first" placeholder="Firstname">
-    <br>
-    <input type="text" name="last" placeholder="Lastname">
-    <br>
-    <input type="text" name="email" placeholder="E-mail">
-    <br>
-    <input type="text" name="uid" placeholder="Username">
-    <br>
-    <input type="password" name="pwd" placeholder="Password">
-    <br>
-    <button type="submit" name="submit">Signup</button>
-</form>
+        else if (strpos($fullUrl, "signup=char") == true) {
+            echo "<p>You used invalid characters!</p>";
+            exit();
+        }
+        else if (strpos($fullUrl, "signup=email") == true) {
+            echo "<p>You used an invalid e-mail!</p>";
+            exit();
+        }
+        else if (strpos($fullUrl, "signup=success") == true) {
+            echo "<p>You have beem signed up!</p>";
+            exit();
+        }
+    ?>
     
 </body>
 </html>
