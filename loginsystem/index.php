@@ -1,3 +1,7 @@
+<?php 
+    include_once './includes/database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,20 @@
     <title></title>
 </head>
 <body>
+
+<?php
+
+        $sql = "SELECT * FROM users WHERE user_last='Doe';";
+        $result = mysqli_query($conn, $sql);
+
+        $resultCheck = mysqli_num_rows($result);
+
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo $row['user_first']. "<br>";
+            }
+        }
+?>
 
 <form action="includes/signup.php" method="POST">
     <input type="text" name="first" placeholder="Firstname">
