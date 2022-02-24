@@ -8,8 +8,8 @@
                 <h1 class="input-page-head">Login</h1>
                 <form action="includes/login.inc.php" method="post" class="input-form">
                     <?php 
-                        if (isset($_POST['mailuid'])) {
-                            $mailuid = $_POST['mailuid'];
+                        if (isset($_GET['mailuid'])) {
+                            $mailuid = $_GET['mailuid'];
                             echo '<input type="text" name="mailuid" value="'.$mailuid.'">';
                         }
                         else {
@@ -21,13 +21,13 @@
                 </form>
                 <section class="error">
                     <?php
-                        if (isset($_POST['login'])) {
-                            $loginVal = $_POST['login'];
+                        if (isset($_GET['login'])) {
+                            $loginVal = $_GET['login'];
 
-                            if ($login == "empty") {
+                            if ($loginVal == "empty") {
                                 echo '<p>Fill all inputs</p>';
                             }
-                            else if ($login == "failed") {
+                            else if ($loginVal == "failed") {
                                 echo '<p>Username or password is incorrect!</p>';
                                 echo '<p>Don\'t have an account? <a href="signup.php">Sign up</a></p>';
                             }
