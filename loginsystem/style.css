@@ -21,6 +21,12 @@
     display: inline;
 }
 
+.ul-nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .ul-nav-header-li{
     display: inline;
     font-weight: bold;
