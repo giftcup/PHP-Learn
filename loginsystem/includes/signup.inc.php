@@ -1,6 +1,6 @@
 <?php
 
-    if (!isset($_GET['signup-submit'])) {
+    if (!isset($_POST['signup-submit'])) {
         header("Location: ../signup.php?signup=error");
         exit();
     }
@@ -20,6 +20,47 @@
     if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
         header("Location: ../signup.php?signup=email&uid=$uid&mail=$mail");
         exit();
+    }
+    else {
+        $sql = "SELECT uname FROM users WHERE uname=?;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("Location: ../signup.php?signup=sqlerror&uid=$uid&mail=$mail");
+            exit();
+        }
+        else {
+            mysqli_stmt_bind_param($stmt, "s", $uid);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
+            $resultCheck = mysqli_stmt_num_rows($stmt);
+
+            if ($resultCheck > 0) {
+                header("Location: ../signup.php?signup=userNameTaken&uid=$uid&mail=$mail");
+                exit();
+            }
+
+            else {
+                $sql = "SELECT uemail FROM users WHERE uemail=?;";
+                $stmt = mysqli_stmt_init($conn);
+
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header("Location: ../signup.php?signup=sqlerror&uid=$uid&mail=$mail");
+                    exit();
+                }
+                else {
+                    mysqli_stmt_bind_param($stmt, "s", $mail);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_store_result($stmt);
+                    $resultCheck = mysqli_stmt_num_rows($stmt);
+
+                    if ($resultCheck > 0) {
+                        header("Location: ../signup.php?signup=emailRegistered&uid=$uid&mail=$mail");
+                        exit();
+                    }
+                }
+            }
+        }
     }
 
     if ($pwd !== $pwdRepeat) {
