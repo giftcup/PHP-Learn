@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +21,20 @@
                 <li class="ul-nav-header-li"><a href="#">Contact</a></li>
             </ul>
             <div class="pages-nav-header">
-                <a href="login.php">Login</a>
-                <a href="signup.php">Signup</a>
-                <form action="includes/logout.inc.php" method="post" class="logout-button">
-                    <button type="submit" name="logout-submit"  class="submit-button">Logout</button>
-                </form>
+
+            <?php 
+
+                if (isset($_SESSION['userName'])) {
+                    echo '<form action="includes/logout.inc.php" method="post" class="logout-button">
+                          <button type="submit" name="logout-submit"  class="submit-button">Logout</button>
+                          </form>';
+                }
+                else {
+                    echo '<a href="login.php">Login</a>
+                          <a href="signup.php">Signup</a>';
+                }
+
+            ?>
             </div>
         </nav>
     </header>
