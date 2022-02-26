@@ -11,6 +11,15 @@
     <title></title>
 </head>
 <body>
+
+    <?php 
+        if (isset($SESSION['id'])) {
+            if (isset($_SESSION['id']) == 1) {
+                echo 'You are logged in';
+            }
+        }
+    
+    ?>
     
 
     <form action="upload.php">
