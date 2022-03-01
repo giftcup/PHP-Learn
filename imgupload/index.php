@@ -14,19 +14,17 @@
 
     <?php 
         if (isset($SESSION['id'])) {
-            if (isset($_SESSION['id']) == 1) {
-                echo 'You are logged in';
+            if ($_SESSION['id'] == 1) {
+                echo 'You are logged in as user #1';
             }
+            echo '<form action="upload.php">
+                <input type="file" name="file">
+                <button type="submit" name="file-submit">UPLOAD</button>
+                </form>';
         }
     
     ?>
     
-
-    <form action="upload.php">
-        <input type="file" name="file">
-        <button type="submit" name="file-submit">UPLOAD</button>
-    </form>
-
     <p>Login as User</p>
     <form action="login.php" method="POST">
         <button type="submit" name="submitLogin">Login</button>
