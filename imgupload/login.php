@@ -4,5 +4,5 @@
 
     if (isset($_POST['submitLogin'])) {
         $_SESSION['id'] = 1;
-        header("Location: index.php");
+        header("Location: ./index.php");
     }
