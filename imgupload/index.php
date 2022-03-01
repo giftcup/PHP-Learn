@@ -13,7 +13,7 @@
 <body>
 
     <?php 
-        if (isset($SESSION['id'])) {
+        if (isset($_SESSION['id'])) {
             if ($_SESSION['id'] == 1) {
                 echo 'You are logged in as user #1';
             }
@@ -31,7 +31,7 @@
     </form>
 
     <p>Login out User</p>
-    <form action="logout.php" method="POST">
+    <form action="logouts.php" method="POST">
         <button type="submit" name="submitLogout">Logout</button>
     </form>
 
