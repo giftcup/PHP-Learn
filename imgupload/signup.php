@@ -9,7 +9,7 @@ include_once 'dbh.php';
 
     $sql = "INSERT INTO users(first, last, username, password) VALUES ('$first', '$last', '$uid', '$pwd');";
 
-    $result = mysqli_query($conn, $sql);
+    mysqli_query($conn, $sql);
 
     $sql = "SELECT * FROM users WHERE username='$uid' AND first='$first';";
     $result = mysqli_query($conn, $sql);
@@ -17,8 +17,11 @@ include_once 'dbh.php';
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $userId = $row['userId'];
-            $sql = "INSERT INTO profileImg(userId, status) VALUES ('$userId', 1)';";
+            $sql = "INSERT INTO profileimg(userId, status) VALUES ('$userId', 1);";
             mysqli_query($conn, $sql);
             header("Location: index.php");
         }
+    }
+    else {
+        echo "You have an error!";
     }

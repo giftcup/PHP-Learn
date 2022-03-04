@@ -11,21 +11,22 @@
     <title></title>
 </head>
 <body>
-
+    <h1>Hello World</h1>
     <?php 
         $sql = "SELECT * FROM users;";
+        
         $result = mysqli_query($conn, $sql);
+        $resultNum = mysqli_num_rows($result);
 
-        if (mysqli_num_rows($result > 0)) {
-            while ($rows = mysqli_fetch_assoc($result)) {
+        if ($resultNum > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row['userId'];
-                $sqlImg = "SELECT * FROM profileImg WHERE userId='$id';";
+                $sqlImg = "SELECT * FROM profileimg WHERE userId='$id';";
                 $resultImg = mysqli_query($conn, $sqlImg);
-
                 while ($rowImg = mysqli_fetch_assoc($resultImg)) {
                     echo '<div>';
                         if ($rowImg['status'] == 0) {
-                            echo '<img src="uploads/profile".$id.".jpg">';
+                            echo '<img src="uploads/profile '.$id.'.jpg">';
                         }
                         else {
                             echo '<img src="uploads/profiledefault.jpg">';
@@ -44,14 +45,14 @@
             if ($_SESSION['id'] == 1) {
                 echo 'You are logged in as user #1';
             }
-            echo '<form action="upload.php">
+            echo '<form action="upload.php" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file">
-                <button type="submit" name="file-submit">UPLOAD</button>
+                <button type="submit" name="submit">UPLOAD</button>
                 </form>';
         }
         else {
             echo "You are not logged in!";
-            echo '<form action="signup.php" method="post">
+            echo '<form action="signupgit add .php" method="POST">
                 <input type="text" name="first" placeholder="First name">
                 <input type="text" name="last" placeholder="Last name">
                 <input type="text" name="uid" placeholder="Username">
@@ -66,7 +67,7 @@
         <button type="submit" name="submitLogin">Login</button>
     </form>
 
-    <p>Login out User</p>
+    <p>Logout as User</p>
     <form action="logouts.php" method="POST">
         <button type="submit" name="submitLogout">Logout</button>
     </form>
