@@ -47,17 +47,19 @@
             }
             echo '<form action="upload.php" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file">
-                <button type="submit" name="submit">UPLOAD</button>
+                <button type="submit" name="submitfile">UPLOAD</button>
                 </form>';
         }
         else {
             echo "You are not logged in!";
-            echo '<form action="signupgit add .php" method="POST">
+            echo 
+            '<form action="signup.php" method="POST">
                 <input type="text" name="first" placeholder="First name">
                 <input type="text" name="last" placeholder="Last name">
                 <input type="text" name="uid" placeholder="Username">
                 <input type="password" name="pwd" placeholder="Password">
-                <button type="submit" name="submitSignup">Signup</button>';
+                <button type="submit" name="submitSignup">Signup</button>
+            </form';
         } 
     
     ?>
