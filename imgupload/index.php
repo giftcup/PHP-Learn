@@ -27,7 +27,12 @@
                 while ($rowImg = mysqli_fetch_assoc($resultImg)) {
                     echo '<div class="image">';
                         if ($rowImg['status'] == 0) {
-                            echo '<img src="uploads/profile'.$id.'.jpg?"'.mt_rand().'>';
+                            $filename = 'uploads/profile'.$id.'.'.'*';
+                            $fileinfo = glob($filename); 
+                            $fileExt = explode('.', $fileinfo[0]);
+                            $fileActualExt = $fileExt[1];
+                            
+                            echo '<img src="uploads/profile'.$id.'.' .$fileActualExt.'?'.mt_rand().'">';
                         }
                         else {
                             echo '<img src="uploads/profiledefault.jpg">';
@@ -49,6 +54,10 @@
             echo '<form action="upload.php" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file">
                 <button type="submit" name="submitfile">UPLOAD</button>
+                </form>';
+            
+                echo '<form action="deleteprofile.php" method="POST">
+                <button type="submit" name="submitfile">Delete Profile image</button>
                 </form>';
         }
         else {
