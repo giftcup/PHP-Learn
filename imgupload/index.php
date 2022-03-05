@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title></title>
 </head>
 <body>
@@ -24,9 +25,9 @@
                 $sqlImg = "SELECT * FROM profileimg WHERE userId='$id';";
                 $resultImg = mysqli_query($conn, $sqlImg);
                 while ($rowImg = mysqli_fetch_assoc($resultImg)) {
-                    echo '<div>';
+                    echo '<div class="image">';
                         if ($rowImg['status'] == 0) {
-                            echo '<img src="uploads/profile '.$id.'.jpg">';
+                            echo '<img src="uploads/profile'.$id.'.jpg?"'.mt_rand().'>';
                         }
                         else {
                             echo '<img src="uploads/profiledefault.jpg">';

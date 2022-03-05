@@ -18,15 +18,16 @@
         $fileActualExt = strtolower(end($fileExt));
 
         $allowed = array('jpg', 'jpeg', 'png');
-        // echo 'hello';
+        
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 10000000) {
-                    $fileNewName = "profile".$id.".".$fileActualExt;
+                    
+                    $fileNewName = "profile".$id."."."jpg";
                     $destination = 'uploads/'.$fileNewName;
                     move_uploaded_file($fileTmpName, $destination);
-                    $sql = "UPDATE profileimg SET status='0' WHERE userId='$id';";
-                    $result = mysqli($conn, $sql);
+                    $sql = "UPDATE profileimg SET status=0 WHERE userId='$id';";
+                    $result = mysqli_query($conn, $sql);
 
                     header("Location: index.php?profilechanged");
                 } 
