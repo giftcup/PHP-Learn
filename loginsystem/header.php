@@ -24,10 +24,11 @@
 
             <?php 
 
-                if (isset($_SESSION['userName'])) {
-                    echo '<form action="includes/logout.inc.php" method="post" class="logout-button">
-                          <button type="submit" name="logout-submit"  class="submit-button">Logout</button>
-                          </form>';
+                if (isset($_SESSION['userName']) && isset($_SESSION['userId'])) {
+                    echo '
+                        <form action="includes/logout.inc.php" method="post" class="logout-button">
+                        <button type="submit" name="logout-submit"  class="submit-button">Logout</button>
+                        </form>';
                 }
                 else {
                     echo '<a href="login.php">Login</a>

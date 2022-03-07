@@ -4,8 +4,8 @@
         header("Location: ../signup.php?signup=error");
         exit();
     }
-   else {
-    require "./database.inc.php";
+    else {
+        require "./database.inc.php";
 
     $uid = mysqli_real_escape_string($conn, $_POST['uid']);
     $mail = mysqli_real_escape_string($conn, $_POST['mail']);

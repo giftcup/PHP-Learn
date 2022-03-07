@@ -10,5 +10,10 @@
         <input type="file" name="file">
         <button type="submit" name="submit">UPLOAD</button>
     </form>
+    
+    <form action="deletefile.php" method="POST">
+        <input type="text" name="filename" placeholder="Seperate each name with a comma (,)" style="width: 300px;">
+        <button type="submit" name="submit">Delete file</button>
+    </form>
 </body>
 </html>

@@ -6,7 +6,7 @@
 
         <?php 
 
-            if (isset($_SESSION['userName'])) {
+            if (isset($_SESSION['userName']) && isset($_SESSION['userId'])) {
                 echo '<p>You are logged in!</p>';
             }
             else {
