@@ -81,6 +81,35 @@
     else {
         mysqli_stmt_bind_param($stmt, "sss", $uid, $mail, $pwdHashed);
         mysqli_stmt_execute($stmt);
+
+        $sql = "SELECT * FROM users WHERE uname=? AND uemail=?";
+        $stmt = mysqli_stmt_init($conn);
+        echo "HERE ";
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            echo "500 error";
+            header("Location: ../index.php?signup=sqlfailure");
+        }
+        echo "HERE ";
+        mysqli_stmt_bind_param($stmt, "ss", $uid, $mail);
+        mysqli_stmt_execute($stmt);
+        
+        $result = mysqli_stmt_get_result($stmt);
+        echo "HERE ";
+        if ($row = mysqli_fetch_assoc($result)) {
+            $pwdCheck = password_verify($pwd, $row['upwd']);
+            if ($pwdCheck == true) {
+                $status = 0;
+                $sqlImg = "INSERT INTO profileimg (status, user_id) VALUES (?,?);";
+                $stmtImg = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmtImg, $sqlImg)) {
+                    echo "ERROR";
+                }
+                mysqli_stmt_bind_param($stmtImg, "ss", $status, $row['user_id']);
+                mysqli_stmt_execute($stmtImg);
+            }
+        }
+
+
         header("Location: ../login.php?signup=success");
     }
 }
