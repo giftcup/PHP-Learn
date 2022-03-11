@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     
@@ -25,6 +25,24 @@
             <?php 
 
                 if (isset($_SESSION['userName']) && isset($_SESSION['userId'])) {
+                    echo '<div class="profile">';
+                    $id = $_SESSION['userId'];
+                    $img = $_SESSION['userImage'];
+
+
+                    if ($img === 1) {
+                        $fileName = 'uploads/profile'. $_SESSION['userId'] . '.' . '*';
+                        $fileInfo = glob($fileName);
+                        $fileExt = explode('.', $fileInfo[0]);
+                        $fileActualExt = strtolower(end($fileExt));
+
+                        echo '<img src="uploads/profile'.$id.'.'.$fileActualExt.'?'.mt_rand().'" alt="Profile Image">';
+                    }
+                    else {
+                        echo '<img src="uploads/profiledefault.jpg" alt="Profile Image">';
+                    }
+                    echo '<p>'.$_SESSION['userName'].'</p>';
+                    echo '</div>';
                     echo '
                         <form action="includes/logout.inc.php" method="post" class="logout-button">
                         <button type="submit" name="logout-submit"  class="submit-button">Logout</button>

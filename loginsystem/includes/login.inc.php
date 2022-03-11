@@ -44,20 +44,17 @@
                 session_start();
                 $_SESSION['userId'] = $row['user_id'];
                 $_SESSION['userName'] = $row['uname'];
+                $_SESSION['userEmail'] = $row['uemail'];
                 
                 $id = $row['user_id'];
-                $sqlImg = "SELECT FROM profileimg WHERE user_id=?;";
+                $sqlImg = "SELECT * FROM profileimg WHERE user_id=?;";
                 
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo '500 ERROR';
                 }
-                echo  $id;
                 mysqli_stmt_bind_param($stmt, "i", $id);
-                echo  $sqlImg;
-
                 mysqli_stmt_execute($stmt);
-                
                 $resultImg = mysqli_stmt_get_result($stmt);
                 
                 if ($resultImg > 1) {

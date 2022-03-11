@@ -1,13 +1,14 @@
 <?php
     require 'header.php';
 ?>
-
+    
     <main>
         <div>
             <section class="input-page">
                 <h1 class="input-page-head">Login</h1>
                 <form action="includes/login.inc.php" method="post" class="input-form">
                     <?php 
+                        
                         if (isset($_GET['mailuid'])) {
                             $mailuid = $_GET['mailuid'];
                             echo '<input type="text" name="mailuid" value="'.$mailuid.'">';

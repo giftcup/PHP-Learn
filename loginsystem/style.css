@@ -17,6 +17,11 @@
     padding: 1em;
 }
 
+.pages-nav-header {
+    display: flex;
+    gap: 2em
+}
+
 .logout-button {
     display: inline;
 }
@@ -85,3 +90,32 @@ header a{
     text-align: center;
     font-weight: bold;
 }
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.profileImg {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+}
+
+.profileImg img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
