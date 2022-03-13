@@ -28,7 +28,7 @@
                     echo '<div class="image">';
                         if ($rowImg['status'] == 0) {
                             $filename = 'uploads/profile'.$id.'.'.'*';
-                            $fileinfo = glob($filename); 
+                             $fileinfo = glob($filename); 
                             $fileExt = explode('.', $fileinfo[0]);
                             $fileActualExt = $fileExt[1];
                             
