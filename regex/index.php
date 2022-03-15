@@ -12,6 +12,8 @@
         $pattern2 = "/me/m";
         $pattern3 = "/is/";
         $pattern4 = "/[^a]/";
+        $pattern5 = "/[^(a-m)]/";
+        $pattern6 = "//";
         $replacement = "will be";
         
         if (preg_match($pattern, $string, $array)) {
@@ -25,7 +27,11 @@
         $newString = preg_replace($pattern3, $replacement, $string);
         echo $newString;
 
-        if (preg_match($pattern4, $string, $array)) {
+        if (preg_match_all($pattern4, $string, $array)) {
+            print_r($array);
+        }
+
+        if (preg_match_all($pattern5, $string, $array)) {
             print_r($array);
         }
     ?>
