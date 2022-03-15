@@ -11,6 +11,7 @@
         $pattern = "/(sal)(ome)/i";
         $pattern2 = "/me/m";
         $pattern3 = "/is/";
+        $pattern4 = "/[^a]/";
         $replacement = "will be";
         
         if (preg_match($pattern, $string, $array)) {
@@ -23,6 +24,10 @@
 
         $newString = preg_replace($pattern3, $replacement, $string);
         echo $newString;
+
+        if (preg_match($pattern4, $string, $array)) {
+            print_r($array);
+        }
     ?>
 </body>
 </html>
