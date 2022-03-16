@@ -13,6 +13,10 @@
     }
     catch (Exception $e){
         echo "Unable to divide<br>";
+        echo $e->getMessage()."<br>";
+        echo $e->getCode()."<br>";
+        echo $e->getFile()."<br>";
+        echo $e->getLine()."<br>";
     }
     finally {
         echo "Finished!";
