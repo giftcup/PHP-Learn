@@ -109,6 +109,7 @@ header a{
     display: flex;
     flex-direction: column;
     padding-left: 2em;
+    line-height: 2em;
 }
 
 .profileImg img{
@@ -119,3 +120,21 @@ header a{
     object-position: top;
 }
 
+.profileImg form button {
+    padding: 1em;
+    color: #fff;
+    background-color: black;
+    box-shadow: #fff;
+}
+
+/* .profile-button {
+    padding: 1em;
+    color: #fff;
+    background-color: black;
+    box-shadow: #fff;
+} */
+
+/* .profileForm {
+    display: inline;
+    padding: 1em 0;
+} */
