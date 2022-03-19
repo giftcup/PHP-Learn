@@ -20,3 +20,5 @@
     
     mysqli_stmt_bind_param($stmt, "ss", $user_id, $friend_id);
     mysqli_stmt_execute($stmt);
+
+    header("Location: ../index.php?addedfriend");

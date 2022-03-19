@@ -1,5 +1,10 @@
 <?php
     require 'header.php';
+
+    if (isset($_SESSION['userName'])) {
+        header("Location: index.php?redirect");
+        exit();
+    }
 ?>
     
     <main>

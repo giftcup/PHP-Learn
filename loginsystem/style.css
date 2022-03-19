@@ -134,8 +134,9 @@ header a{
 
 .user {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin: 1em auto;
+    margin: 1em;
     gap: 1em;
     padding: 1em;
 }
@@ -164,11 +165,20 @@ header a{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
 }
 
 .uname {
     font-size: 16px;
     font-weight: bold;
+}
+
+.registered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 18%;
 }
 
 /* .profile-button {

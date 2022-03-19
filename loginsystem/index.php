@@ -5,6 +5,8 @@
 
     <main>
         <h2>All Users</h2>
+
+        <div class="registered">
         <?php 
         
             if (isset($_SESSION['userName'])) {
@@ -63,6 +65,7 @@
             }
         
         ?>
+    </div>
     </main>
 
 <?php

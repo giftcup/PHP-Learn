@@ -52,8 +52,9 @@
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo '500 ERROR';
-                }
-                mysqli_stmt_bind_param($stmt, "i", $id);
+                } echo "Here";
+                mysqli_stmt_bind_param($stmt, "s", $id);
+                echo "Here";
                 mysqli_stmt_execute($stmt);
                 $resultImg = mysqli_stmt_get_result($stmt);
                 

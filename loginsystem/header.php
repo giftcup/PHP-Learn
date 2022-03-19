@@ -18,7 +18,7 @@
                 <li class="ul-nav-header-li"><a href="index.php">Home</a></li>
                 <li class="ul-nav-header-li"><a href="#">Portfolio</a></li>
                 <li class="ul-nav-header-li"><a href="./about.php">About Me</a></li>
-                <li class="ul-nav-header-li"><a href="#">Contact</a></li>
+                <li class="ul-nav-header-li"><a href="./contacts.php">Contacts</a></li>
             </ul>
             <div class="pages-nav-header">
 
