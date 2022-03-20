@@ -4,7 +4,7 @@
 ?>
 
     <main>
-        <h2>All Users</h2>
+        <h2>Other Users</h2>
 
         <div class="registered">
         <?php 
@@ -16,8 +16,19 @@
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row['user_id'];
-
-                        if ($id == $_SESSION['userId'])
+                        $sqlFriends = "SELECT * FROM friends WHERE user_id=? AND friend_id=?;";
+                        $stmt = mysqli_stmt_init($conn);
+                        if (!mysqli_stmt_prepare($stmt, $sqlFriends)) {
+                            header("Location: index.php? sqlerror");
+                        }
+                        mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user_id'], $id);
+                        mysqli_stmt_execute($stmt);
+                        $resultFriends = mysqli_stmt_get_result($stmt);
+                        $resultNum = mysqli_num_rows($resultFriends);
+                        echo $resultNum;
+                        $rows = mysqli_fetch_assoc($resultFriends);
+                        echo $rows['user_id'];
+                        if ($id == $_SESSION['userId'] || $resultNum > 0)
                             continue;
                         
                         echo '<div class="user">';
