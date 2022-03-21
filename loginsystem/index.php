@@ -15,20 +15,21 @@
 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['user_id'];
+                        $fid = $row['user_id'];
+                        $id = $_SESSION['userId'];
+                        
                         $sqlFriends = "SELECT * FROM friends WHERE user_id=? AND friend_id=?;";
                         $stmt = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($stmt, $sqlFriends)) {
-                            header("Location: index.php? sqlerror");
+                            header("Location: index.php?sqlerror");
                         }
-                        mysqli_stmt_bind_param($stmt, "ss", $_SESSION['user_id'], $id);
+                        mysqli_stmt_bind_param($stmt, "ss", $id, $fid);
                         mysqli_stmt_execute($stmt);
                         $resultFriends = mysqli_stmt_get_result($stmt);
                         $resultNum = mysqli_num_rows($resultFriends);
-                        echo $resultNum;
                         $rows = mysqli_fetch_assoc($resultFriends);
-                        echo $rows['user_id'];
-                        if ($id == $_SESSION['userId'] || $resultNum > 0)
+
+                        if ($fid == $id || $resultNum > 0)
                             continue;
                         
                         echo '<div class="user">';
@@ -39,19 +40,19 @@
                                     header("Location: index.php?sqlError");
                                     exit();
                                 }
-                                mysqli_stmt_bind_param($stmt, "s", $id);
+                                mysqli_stmt_bind_param($stmt, "s", $fid);
                                 mysqli_stmt_execute($stmt);
                                 $resultImg = mysqli_stmt_get_result($stmt);
                                 
                                 if (mysqli_num_rows($resultImg) == 1) {
                                     $rowImg = mysqli_fetch_assoc($resultImg);
-                                    $file = 'uploads/profile'.$id.'.'.'*';
+                                    $file = 'uploads/profile'.$fid.'.'.'*';
                                     $fileInfo = glob($file);
                                     $fileExt = explode('.', $fileInfo[0]);
                                     $fileActExt = strtolower(end($fileExt));
 
                                     if ($rowImg['status'] == 1) {
-                                        echo '<img src="uploads/profile'.$id.'.'.$fileActExt.'?'.mt_rand().'" alt="profile_image">';
+                                        echo '<img src="uploads/profile'.$fid.'.'.$fileActExt.'?'.mt_rand().'" alt="profile_image">';
                                     }
                                     else {
                                         echo '<img src="uploads/profiledefault.jpg" alt="profile_image">';
@@ -63,7 +64,7 @@
                                 echo '<div>';
                                     echo '<form action="includes/add.inc.php" method="POST">';
                                         echo '<input type="hidden" value="'.$row['user_id'].'" name="friend">'; //vulnerable
-                                        echo '<button type="submit" name="submit-add" class="submitAdd">Add</button>';
+                                        echo '<button type="submit" name="submit-add" class="submit">Follow</button>';
                                     echo '</form>';
                                 echo '</div>';
                             echo '</div>';
