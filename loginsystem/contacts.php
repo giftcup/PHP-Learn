@@ -71,10 +71,17 @@
                                 $rowUser = mysqli_fetch_assoc($resultUser);
                                 echo '<p class="uname">'.$rowUser['uname'].'</p>';
                                 echo '<div>';
-                                    echo '<form action="includes/add.inc.php" method="POST">';
-                                        echo '<input type="hidden" value="'.$row['user_id'].'" name="friend">'; //vulnerable
-                                        echo '<button type="submit" name="submit-remove" class="submitAdd">Remove</button>';
-                                        echo '<button type="submit" name="submit-add" class="submitAdd">Message</button>';
+                                    echo '<form action="includes/remove.inc.php" method="POST">';
+                                        echo '<input type="hidden" value="'.$row['friend_id'].'" name="friend">'; //vulnerable
+                                        echo '<div class="buttons">';
+                                            echo '<button type="submit" name="submit-remove" class="submit">Unfollow</button>';
+                                        echo '</div>';
+                                    echo '</form>';
+                                    echo '<form action="includes/message.inc.php" method="POST">';
+                                        echo '<input type="hidden" value="'.$row['friend_id'].'" name="friend">'; //vulnerable
+                                        echo '<div class="buttons">';
+                                            echo '<button type="submit" name="submit-add" class="submit">Message</button>';
+                                        echo '</div>';
                                     echo '</form>';
                                 echo '</div>';
                             }
