@@ -89,12 +89,10 @@
             echo "500 error";
             header("Location: ../index.php?signup=sqlfailure");
         }
-        echo "HERE ";
         mysqli_stmt_bind_param($stmt, "ss", $uid, $mail);
         mysqli_stmt_execute($stmt);
         
         $result = mysqli_stmt_get_result($stmt);
-        echo "HERE ";
         if ($row = mysqli_fetch_assoc($result)) {
             $pwdCheck = password_verify($pwd, $row['upwd']);
             if ($pwdCheck == true) {
