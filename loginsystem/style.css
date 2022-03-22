@@ -154,11 +154,12 @@ header a{
     object-position: top;
 }
 
-.submitAdd {
+.submit {
     border: 1px solid #000;
     background-color: #fff;
     color: #000;
     padding: 5px 10px;
+    margin: 6px;
 }
 
 .userInfo {
@@ -192,3 +193,99 @@ header a{
     display: inline;
     padding: 1em 0;
 } */
+
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.messages {
+    display: flex;
+}
+
+.contact-list {
+    background-color: cyan;
+}
+
+.text-area {
+    /* background-color: orange; */
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 2em;
+    position: sticky;
+    border-bottom: 3px solid grey;
+}
+
+.user-info img {
+    border: 2px solid grey;
+    border-radius: 50%;
+}
+
+.message-area {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    gap: 1em;
+    padding-bottom: 10%;
+    margin-bottom: 10%;
+}
+
+.received {
+    max-width: 45%;
+    background-color: aqua;
+    justify-content: flex-start;
+    padding: 1em;
+    border-radius: 10px 10px 10px 1px;
+}
+
+.sent {
+    max-width: 45%;
+    background-color:brown;
+    justify-content: flex-end;
+    padding: 1em;
+    margin-left: 50%;
+    border-radius: 10px 10px 1px 10px;
+}
+
+i {
+    font-family: fontawesome !important;
+}
+
+.send-area {
+    margin: 0;
+    position: fixed;
+    background-color: pink;
+    bottom: 0;
+    width: 100%;
+    max-height: 15%;
+}
+
+.send-area form {
+    display: flex;
+}
+
+.message-form {
+    background-color: aquamarine;
+    border-radius: 10px;
+    margin: 1em;
+    width: 90%;
+    padding: 5px;
+}
+
+#message {
+}
+
+.send-message {
+    margin: 1em 1em 1em 0;
+    background: unset;
+    border: none;
+}
