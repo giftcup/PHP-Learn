@@ -8,7 +8,26 @@
 
     <div class="contact-list">
 
-        <p>Hello</p>
+        <h1>Messages</h1>
+        <div class="friends">
+            <?php
+            $i = 0;
+            while ($i < 100) {
+            echo  <<<_END
+                <div class="user-message">
+                    <div class="userImg-message">
+                        <img src="uploads/profile24.jpg" alt="profile_image">
+                    </div>
+                    <div class="userInfo-message">
+                        <h4>User</h4>
+                        <p class="last-message">Lorem ipsum dolor sit amet consectetur</p>
+                    </div>
+                </div>
+            _END;
+                $i++;
+            }
+            ?>
+        </div>
         
     </div>
 
@@ -46,12 +65,12 @@
             </div>
         </div>
         <div class="send-area">
-            <div class="message-form">
+            <!-- <div class="message-form"> -->
                 <form action="">
                     <textarea name="message" id="message"></textarea>
                     <button type="submit" name="send-message" class="send-message"><i class="fas fa-paper-plane"></i></button>
                 </form>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 

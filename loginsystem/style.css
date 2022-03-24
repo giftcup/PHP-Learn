@@ -207,11 +207,18 @@ header a{
 }
 
 .contact-list {
-    background-color: cyan;
+    /* background-color: cyan; */
+    border-right: 2px solid grey;
+    height: 100vh;
+    /* position: fixed; */
+    width: 30vw;
+    position:absolute;
 }
 
 .text-area {
     /* background-color: orange; */
+    /* width: 70vw; */
+    margin-left: 30vw;
 }
 
 .user-info {
@@ -226,7 +233,7 @@ header a{
 }
 
 .user-info img {
-    border: 2px solid grey;
+    border: 2px solid #FF7A7A;
     border-radius: 50%;
 }
 
@@ -241,7 +248,7 @@ header a{
 
 .received {
     max-width: 45%;
-    background-color: aqua;
+    background-color: #FF7A7A;
     justify-content: flex-start;
     padding: 1em;
     border-radius: 10px 10px 10px 1px;
@@ -249,7 +256,7 @@ header a{
 
 .sent {
     max-width: 45%;
-    background-color:brown;
+    background-color:#CCCCCC;
     justify-content: flex-end;
     padding: 1em;
     margin-left: 50%;
@@ -263,7 +270,7 @@ i {
 .send-area {
     margin: 0;
     position: fixed;
-    background-color: pink;
+    background-color: #000000;
     bottom: 0;
     width: 100%;
     max-height: 15%;
@@ -271,21 +278,69 @@ i {
 
 .send-area form {
     display: flex;
-}
-
-.message-form {
-    background-color: aquamarine;
-    border-radius: 10px;
-    margin: 1em;
-    width: 90%;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
 }
 
 #message {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border-color: #000000;
+    margin: 1em;
+    width: 80%;
+    padding: 5px;
+    font: inherit;
+}
+
+.fa-paper-plane {
+    font-size: 28px;
+    color: #FF7A7A;
 }
 
 .send-message {
     margin: 1em 1em 1em 0;
     background: unset;
     border: none;
+}
+
+.user-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    border-top: 1px solid #FF7A7A;
+    padding: 1em;
+}
+
+.contact-list {
+    padding: 1em;
+}
+
+.contact-list h1 {
+    padding: 1em;
+    text-align: center;
+}
+
+.last-message {
+    font-size: 12px;
+}
+
+.userInfo-message {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.userImg-message {
+    width: 60px;
+    height: 60px;
+}
+
+.userImg-message img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
 }
