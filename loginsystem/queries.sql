@@ -13,3 +13,12 @@ CREATE TABLE friends (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (friend_id) REFERENCES users(user_id)
 );
+
+CREATE TABLE message (
+	message_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    message LONGTEXT NOT NULL,
+    sender INT NOT NULL,
+    receiver INT NOT NULL,
+    FOREIGN KEY (sender) REFERENCES users(user_id),
+    FOREIGN KEY (receiver) REFERENCES users(user_id)
+);

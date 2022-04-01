@@ -11,21 +11,24 @@
         <h1>Messages</h1>
         <div class="friends">
             <?php
-            $i = 0;
-            while ($i < 100) {
-            echo  <<<_END
-                <div class="user-message">
-                    <div class="userImg-message">
-                        <img src="uploads/profile24.jpg" alt="profile_image">
-                    </div>
-                    <div class="userInfo-message">
-                        <h4>User</h4>
-                        <p class="last-message">Lorem ipsum dolor sit amet consectetur</p>
-                    </div>
-                </div>
-            _END;
-                $i++;
-            }
+            
+                include 'includes/fetch_friends.php';
+                
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo  <<<_END
+                            <div class="user-message">
+                                <div class="userImg-message">
+                                    <img src="uploads/profile24.jpg" alt="profile_image">
+                                </div>
+                                <div class="userInfo-message">
+                                    <h4>User</h4>
+                                    <p class="last-message">Lorem ipsum dolor sit amet consectetur</p>
+                                </div>
+                            </div>
+                        _END;
+                    }  
+                }  
             ?>
         </div>
         

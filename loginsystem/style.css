@@ -233,7 +233,7 @@ header a{
 }
 
 .user-info img {
-    border: 2px solid #FF7A7A;
+    border: 2px solid #000000;
     border-radius: 50%;
 }
 
@@ -248,7 +248,8 @@ header a{
 
 .received {
     max-width: 45%;
-    background-color: #FF7A7A;
+    background-color: #000012;
+    color: #cccccc;
     justify-content: flex-start;
     padding: 1em;
     border-radius: 10px 10px 10px 1px;
@@ -256,7 +257,7 @@ header a{
 
 .sent {
     max-width: 45%;
-    background-color:#CCCCCC;
+    background-color:#cccccc;
     justify-content: flex-end;
     padding: 1em;
     margin-left: 50%;
@@ -295,7 +296,7 @@ i {
 
 .fa-paper-plane {
     font-size: 28px;
-    color: #FF7A7A;
+    color: #000000;
 }
 
 .send-message {
@@ -309,7 +310,7 @@ i {
     align-items: center;
     justify-content: center;
     gap: 1em;
-    border-top: 1px solid #FF7A7A;
+    border-top: 1px solid #000000;
     padding: 1em;
 }
 

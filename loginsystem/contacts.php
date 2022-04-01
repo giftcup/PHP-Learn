@@ -9,6 +9,7 @@
 
     <div class="registered">
     <?php 
+        
         if (isset($_SESSION['userName'])) {
             $id = $_SESSION['userId'];
             $sql = "SELECT * FROM friends WHERE user_id=?;";
