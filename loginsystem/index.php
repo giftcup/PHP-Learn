@@ -75,10 +75,9 @@
             else {
                 echo '<p>You are logged out!</p>';
             }
-        
         ?>
     </div>
-    </main>
+</main>
 
 <?php
     require 'footer.php';

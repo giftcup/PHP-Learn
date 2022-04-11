@@ -1,3 +1,5 @@
+<!-- Contains information about the user's friends -->
+
 <?php
     session_start();
     require 'includes/database.inc.php';
