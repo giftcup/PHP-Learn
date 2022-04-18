@@ -345,3 +345,9 @@ i {
     object-fit: cover;
     object-position: top;
 }
+
+.friends {
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

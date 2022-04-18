@@ -16,8 +16,11 @@
                 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                        
+                        $id = $row['friend_id'];
+
                         echo  <<<_END
-                            <div class="user-message">
+                            <a class="user-message" href="./message.php?">
                                 <div class="userImg-message">
                                     <img src="uploads/profile24.jpg" alt="profile_image">
                                 </div>
@@ -25,7 +28,7 @@
                                     <h4>User</h4>
                                     <p class="last-message">Lorem ipsum dolor sit amet consectetur</p>
                                 </div>
-                            </div>
+                            </a>
                         _END;
                     }  
                 }  
