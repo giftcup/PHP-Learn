@@ -34,39 +34,29 @@
                         
                         echo '<div class="user">';
                             echo '<div class="userImg">';
-                                // $sqlImg = "SELECT * FROM profileimg WHERE user_id=?";
-                                // $stmt = mysqli_stmt_init($conn);
-                                // if (!mysqli_stmt_prepare($stmt, $sqlImg)) {
-                                //     header("Location: index.php?sqlError");
-                                //     exit();
-                                // }
-                                // mysqli_stmt_bind_param($stmt, "s", $fid);
-                                // mysqli_stmt_execute($stmt);
-                                // $resultImg = mysqli_stmt_get_result($stmt);
+                                $sqlImg = "SELECT * FROM profileimg WHERE user_id=?";
+                                $stmt = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($stmt, $sqlImg)) {
+                                    header("Location: index.php?sqlError");
+                                    exit();
+                                }
+                                mysqli_stmt_bind_param($stmt, "s", $fid);
+                                mysqli_stmt_execute($stmt);
+                                $resultImg = mysqli_stmt_get_result($stmt);
                                 
-                                // if (mysqli_num_rows($resultImg) == 1) {
-                                //     $rowImg = mysqli_fetch_assoc($resultImg);
-                                //     $file = 'uploads/profile'.$fid.'.'.'*';
-                                //     $fileInfo = glob($file);
-                                //     $fileExt = explode('.', $fileInfo[0]);
-                                //     $fileActExt = strtolower(end($fileExt));
+                                if (mysqli_num_rows($resultImg) == 1) {
+                                    $rowImg = mysqli_fetch_assoc($resultImg);
+                                    $file = 'uploads/profile'.$fid.'.'.'*';
+                                    $fileInfo = glob($file);
+                                    $fileExt = explode('.', $fileInfo[0]);
+                                    $fileActExt = strtolower(end($fileExt));
 
-                                //     if ($rowImg['status'] == 1) {
-                                //         echo '<img src="uploads/profile'.$fid.'.'.$fileActExt.'?'.mt_rand().'" alt="profile_image">';
-                                //     }
-                                //     else {
-                                //         echo '<img src="uploads/profiledefault.jpg" alt="profile_image">';
-                                //     }
-                                // }
-                                include 'display-profile.php';
-
-                                $fileActExt = get_profile($fid);
-                                echo "here";
-                                if ($fileActExt === NULL) {
-                                    echo '<img src="uploads/profiledefault.jpg" alt="profile_image">';
-                                } 
-                                else {
-                                    echo '<img src="uploads/profile'.$fid.'.'.$fileActExt.'?'.mt_rand().'" alt="profile_image">';
+                                    if ($rowImg['status'] == 1) {
+                                        echo '<img src="uploads/profile'.$fid.'.'.$fileActExt.'?'.mt_rand().'" alt="profile_image">';
+                                    }
+                                    else {
+                                        echo '<img src="uploads/profiledefault.jpg" alt="profile_image">';
+                                    }
                                 }
                             echo '</div>';
                             echo '<div class="userInfo">';
