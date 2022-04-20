@@ -26,3 +26,4 @@ function get_profile(int $fid) {
             return $fileActExt;
         }
     }
+}
