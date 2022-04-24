@@ -162,7 +162,7 @@ include 'header.php';
         </div>
         <div class="send-area">
             <!-- <div class="message-form"> -->
-            <form action="">
+            <form action="send_message.inc.php" method="POST">
                 <textarea name="message" id="message"></textarea>
                 <button type="submit" name="send-message" class="send-message"><i class="fas fa-paper-plane"></i></button>
             </form>
