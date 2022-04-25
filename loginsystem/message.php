@@ -84,6 +84,7 @@ include 'header.php';
                         exit();
                     }
                     $row = mysqli_fetch_assoc($resultsFriends);
+                    $username = $row['uname'];
 
                     echo '   <div class="userInfo-message">
                                 <h4>' . $row['uname'] . '</h4>
@@ -132,9 +133,18 @@ include 'header.php';
                 }
                 ?>
             </div>
-            <p class="uname">Username</p>
+            <p class="uname"><?php echo $username; ?></p>
         </div>
         <div class="message-area">
+
+            <?php 
+            
+            $sql = "SELECT * FROM message WHERE ";
+            $stmt = mysqli_stmt_init($conn);
+
+            ?>
+
+
             <div class="sent">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
             </div>
@@ -162,14 +172,14 @@ include 'header.php';
         </div>
         <div class="send-area">
             <!-- <div class="message-form"> -->
-            <form action="send_message.inc.php" method="POST">
+            <form action="includes/send_message.inc.php" method="POST">
+                <input type="hidden" value=<?php echo $fid; ?> name="friend_id">
                 <textarea name="message" id="message"></textarea>
                 <button type="submit" name="send-message" class="send-message"><i class="fas fa-paper-plane"></i></button>
             </form>
             <!-- </div> -->
         </div>
     </div>
-
 </main>
 
 <?php include 'footer.php'; ?>
