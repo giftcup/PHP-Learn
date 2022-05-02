@@ -28,11 +28,8 @@ else {
             exit();
         }
 
-        echo $sender_id.'<br>'.$friend_id.'<br>'.$message.'<br>'.$time.'<br>';
-
         mysqli_stmt_bind_param($stmt, "ssss", $sender_id, $friend_id, $message, $time);
         mysqli_stmt_execute($stmt);
-        echo 'here';
 
         header("Location:../message.php?message=sent&friendId=".$friend_id."");
 

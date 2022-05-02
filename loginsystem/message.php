@@ -139,13 +139,55 @@ include 'header.php';
 
             <?php 
             
-            $sql = "SELECT * FROM message WHERE ";
+            $uid = $_SESSION['userId'];
+
+            $sql = "SELECT * FROM message WHERE (sender_id=? AND receiver_id=?) OR (sender_id=? AND receiver_id=?)";
             $stmt = mysqli_stmt_init($conn);
+
+            if (!(mysqli_stmt_prepare($stmt, $sql))) {
+                echo "SQL FAILURE";
+                header('Location: message.php?fail=sql');
+            }
+
+            mysqli_stmt_bind_param($stmt, 'ssss', $uid, $fid, $fid, $uid);
+            mysqli_stmt_execute($stmt);
+            $messages = mysqli_stmt_get_result($stmt);
+            $num_of_messages = mysqli_num_rows($messages);
+
+            if ($num_of_messages > 0) {
+                while ($message_row = mysqli_fetch_assoc($messages)) {
+                
+                    // echo '
+                    // <div class= '.$uid == $message_row[sender_id] : .' "sent" '. ? .' "received" >
+                    //     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
+                    // </div>
+                    // ';
+
+                    if ($uid == $message_row['sender_id']) {
+                        echo '
+                        <div class="sent">
+                            <p>'.$message_row['messages'].'</p>
+                        </div>
+                        ';
+                    }
+                    else if ($uid == $message_row['receiver_id']) {
+                        echo '
+                        <div class="received">
+                            <p>'.$message_row['messages'].'</p>
+                        </div>
+                        ';
+                    }
+
+                }
+            }
+            else {
+                echo '<h1>No messages</h1>';
+            }
 
             ?>
 
 
-            <div class="sent">
+            <!-- <div class="sent">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
             </div>
             <div class="received">
@@ -168,7 +210,7 @@ include 'header.php';
             </div>
             <div class="received">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla, vitae finibus magna fringilla a. Fusce maximus mattis purus. Nam risus elit, vehicula quis .</p>
-            </div>
+            </div> -->
         </div>
         <div class="send-area">
             <!-- <div class="message-form"> -->

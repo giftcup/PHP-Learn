@@ -217,7 +217,7 @@ header a{
 
 .text-area {
     /* background-color: orange; */
-    /* width: 70vw; */
+    width: 70vw;
     margin-left: 30vw;
 }
 
@@ -262,6 +262,7 @@ header a{
     padding: 1em;
     margin-left: 50%;
     border-radius: 10px 10px 1px 10px;
+    text-align: right;
 }
 
 i {
@@ -295,15 +296,11 @@ i {
     font: inherit;
 }
 
-.fa-paper-plane {
-    font-size: 28px;
-    color: #000000;
-}
-
 .send-message {
     margin: 1em 1em 1em 0;
     background: unset;
     border: none;
+    font-size: 28px;
 }
 
 .user-message {
