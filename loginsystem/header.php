@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'includes/get_user_picture.php';
+require 'includes/get_users.inc.php';
 ?>
 
 <!DOCTYPE html>

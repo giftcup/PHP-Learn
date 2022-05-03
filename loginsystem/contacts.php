@@ -50,15 +50,8 @@
                         echo '</div>';
 
                         echo '<div class="userInfo">';
-                            $sqlUser = "SELECT * FROM users WHERE user_id=?";
-                            $stmt = mysqli_stmt_init($conn);
-                            if (!mysqli_stmt_prepare($stmt, $sqlUser)) {
-                                header("Location: index.php?sqlError");
-                                exit();
-                            }
-                            mysqli_stmt_bind_param($stmt, "s", $fid);
-                            mysqli_stmt_execute($stmt);
-                            $resultUser = mysqli_stmt_get_result($stmt);
+                            $resultUser = get_user($fid, $conn);
+                            
                             if (mysqli_num_rows($resultUser) == 1) {
                                 $rowUser = mysqli_fetch_assoc($resultUser);
                                 echo '<p class="uname">'.$rowUser['uname'].'</p>';

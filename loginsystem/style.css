@@ -10,9 +10,17 @@ h2 {
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
 .header {
     background-color: #ffffff;
     border-bottom: 2px solid #000000;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .nav-header {
@@ -44,8 +52,6 @@ h2 {
 
 header a{
     padding: 1em;
-    text-decoration: none;
-    color: #000000;
     /* background-color: brown; */
 }
 
@@ -204,15 +210,31 @@ header a{
 
 .messages {
     display: flex;
+    position: fixed;
 }
 
 .contact-list {
-    /* background-color: cyan; */
     border-right: 2px solid grey;
     height: 100vh;
     /* position: fixed; */
     width: 30vw;
     position:absolute;
+}
+
+.friends {
+    /* margin-top: 7rem; */
+    /* position: fixed; */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 77vh;
+}
+
+.contact-list h1 {
+    background-color: #000;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    position: sticky;
 }
 
 .text-area {
@@ -244,6 +266,8 @@ header a{
     gap: 1em;
     padding-bottom: 10%;
     margin-bottom: 10%;
+    overflow-y: scroll;
+    height: 54vh;
 }
 
 .received {
@@ -315,15 +339,6 @@ i {
     padding: 1em;
 }
 
-.contact-list {
-    padding: 1em;
-}
-
-.contact-list h1 {
-    padding: 1em;
-    text-align: center;
-}
-
 .last-message {
     font-size: 12px;
 }
@@ -345,10 +360,4 @@ i {
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
-}
-
-.friends {
-    position: fixed;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
