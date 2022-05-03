@@ -1,7 +1,10 @@
 <?php
+
 session_start();
-include 'includes/database.inc.php';
+require 'includes/database.inc.php';
+include 'includes/sort_messages.inc.php';
 include 'header.php';
+
 ?>
 
 <main class="messages">
@@ -80,11 +83,10 @@ include 'header.php';
                     $numOfResults = mysqli_num_rows($resultsFriends);
 
                     if ($numOfResults > 1) {
-                        echo "An erro occured. Blocking process...";
+                        echo "An error occured. Blocking process...";
                         exit();
                     }
                     $row = mysqli_fetch_assoc($resultsFriends);
-                    $username = $row['uname'];
 
                     echo '   <div class="userInfo-message">
                                 <h4>' . $row['uname'] . '</h4>
@@ -107,22 +109,11 @@ include 'header.php';
                 } else {
                     $fid = $_GET['friendId'];
 
-                    $sqlImg = "SELECT * FROM profileimg WHERE user_id=?";
-                    $stmt = mysqli_stmt_init($conn);
-                    if (!mysqli_stmt_prepare($stmt, $sqlImg)) {
-                        header("Location: index.php?sqlError");
-                        exit();
-                    }
-                    mysqli_stmt_bind_param($stmt, "s", $fid);
-                    mysqli_stmt_execute($stmt);
-                    $resultImg = mysqli_stmt_get_result($stmt);
+                    $resultImg = get_picture($fid, $conn);
 
                     if (mysqli_num_rows($resultImg) == 1) {
                         $rowImg = mysqli_fetch_assoc($resultImg);
-                        $file = 'uploads/profile' . $fid . '.' . '*';
-                        $fileInfo = glob($file);
-                        $fileExt = explode('.', $fileInfo[0]);
-                        $fileActExt = strtolower(end($fileExt));
+                        $fileActExt = display_pic($fid);
 
                         if ($rowImg['status'] == 1) {
                             echo '<img src="uploads/profile' . $fid . '.' . $fileActExt . '?' . mt_rand() . '" alt="profile_image">';
@@ -137,11 +128,11 @@ include 'header.php';
         </div>
         <div class="message-area">
 
-            <?php 
-            
+            <?php
+
             $uid = $_SESSION['userId'];
 
-            $sql = "SELECT * FROM message WHERE (sender_id=? AND receiver_id=?) OR (sender_id=? AND receiver_id=?)";
+            $sql = "SELECT * FROM message WHERE (sender_id=? AND receiver_id=?) OR (sender_id=? AND receiver_id=?) ORDER BY time_sent";
             $stmt = mysqli_stmt_init($conn);
 
             if (!(mysqli_stmt_prepare($stmt, $sql))) {
@@ -154,9 +145,30 @@ include 'header.php';
             $messages = mysqli_stmt_get_result($stmt);
             $num_of_messages = mysqli_num_rows($messages);
 
+            // $msg = mysqli_fetch_all($messages);
+            
+            // $msg = sort_messages($msg);
+            // $num_messages = sizeof($msg);
+            // echo '<br><br><br>';
+            // print_r($msg);
+
             if ($num_of_messages > 0) {
+                // for ($i = 0; $i < $num_messages; $i++) {
+                //     if ($uid == $msg[$i][0]) {
+                //         echo '
+                //         <div class="sent">
+                //             <p>' . stripcslashes($msg[$i][2]) . '</p>
+                //         </div>
+                //         ';
+                //     } else if ($uid == $msg[$i][1]) {
+                //         echo '
+                //         <div class="received">
+                //             <p>' . stripcslashes($msg[$i][2]) . '</p>
+                //         </div>
+                //         ';
+                //     }
+                // }
                 while ($message_row = mysqli_fetch_assoc($messages)) {
-                
                     // echo '
                     // <div class= '.$uid == $message_row[sender_id] : .' "sent" '. ? .' "received" >
                     //     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
@@ -166,51 +178,22 @@ include 'header.php';
                     if ($uid == $message_row['sender_id']) {
                         echo '
                         <div class="sent">
-                            <p>'.$message_row['messages'].'</p>
+                            <p>' . stripcslashes($message_row['messages']) . '</p>
                         </div>
                         ';
-                    }
-                    else if ($uid == $message_row['receiver_id']) {
+                    } else if ($uid == $message_row['receiver_id']) {
                         echo '
                         <div class="received">
-                            <p>'.$message_row['messages'].'</p>
+                            <p>' . stripcslashes($message_row['messages']) . '</p>
                         </div>
                         ';
                     }
-
                 }
-            }
-            else {
+            } else {
                 echo '<h1>No messages</h1>';
             }
 
             ?>
-
-
-            <!-- <div class="sent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
-            </div>
-            <div class="received">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla, vitae finibus magna fringilla a. Fusce maximus mattis purus. Nam risus elit, vehicula quis .</p>
-            </div>
-            <div class="received">
-                <p> Praesent tincidunt ornare nulla, vitae finibus magna fringilla a. Fusce maximus mattis purus. Nam risus elit, vehicula quis .</p>
-            </div>
-            <div class="sent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
-            </div>
-            <div class="sent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
-            </div>
-            <div class="received">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla, vitae finibus magna fringilla a. Fusce maximus mattis purus. Nam risus elit, vehicula quis .</p>
-            </div>
-            <div class="sent">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
-            </div>
-            <div class="received">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla, vitae finibus magna fringilla a. Fusce maximus mattis purus. Nam risus elit, vehicula quis .</p>
-            </div> -->
         </div>
         <div class="send-area">
             <!-- <div class="message-form"> -->

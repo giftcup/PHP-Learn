@@ -34,22 +34,11 @@
                     
                     echo '<div class="user">';
                         echo '<div class="userImg">';
-                            $sqlImg = "SELECT * FROM profileimg WHERE user_id=?";
-                            $stmt = mysqli_stmt_init($conn);
-                            if (!mysqli_stmt_prepare($stmt, $sqlImg)) {
-                                header("Location: index.php?sqlError");
-                                exit();
-                            }
-                            mysqli_stmt_bind_param($stmt, "s", $fid);
-                            mysqli_stmt_execute($stmt);
-                            $resultImg = mysqli_stmt_get_result($stmt);
+                            $resultImg = get_picture($fid, $conn);
                             
                             if (mysqli_num_rows($resultImg) == 1) {
                                 $rowImg = mysqli_fetch_assoc($resultImg);
-                                $file = 'uploads/profile'.$fid.'.'.'*';
-                                $fileInfo = glob($file);
-                                $fileExt = explode('.', $fileInfo[0]);
-                                $fileActExt = strtolower(end($fileExt));
+                                $fileActExt = display_pic($fid);
 
                                 if ($rowImg['status'] == 1) {
                                     echo '<img src="uploads/profile'.$fid.'.'.$fileActExt.'?'.mt_rand().'" alt="profile_image">';
@@ -75,13 +64,13 @@
                                 echo '<p class="uname">'.$rowUser['uname'].'</p>';
                                 echo '<div>';
                                     echo '<form action="includes/remove.inc.php" method="POST">';
-                                        echo '<input type="hidden" value="'.$row['friend_id'].'" name="friend">'; //vulnerable
+                                        echo '<input type="hidden" value="'.$row['friend_id'].'" name="friend">';
                                         echo '<div class="buttons">';
                                             echo '<button type="submit" name="submit-remove" class="submit">Unfollow</button>';
                                         echo '</div>';
                                     echo '</form>';
                                     echo '<form action="includes/message.inc.php" method="POST">';
-                                        echo '<input type="hidden" value="'.$row['friend_id'].'" name="friend">'; //vulnerable
+                                        echo '<input type="hidden" value="'.$row['friend_id'].'" name="friend">';
                                         echo '<div class="buttons">';
                                             echo '<button type="submit" name="submit-add" class="submit">Message</button>';
                                         echo '</div>';

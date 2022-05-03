@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'includes/get_user_picture.php';
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +39,7 @@ session_start();
 
 
                     if ($img === 1) {
-                        $fileName = 'uploads/profile' . $_SESSION['userId'] . '.' . '*';
-                        $fileInfo = glob($fileName);
-                        $fileExt = explode('.', $fileInfo[0]);
-                        $fileActualExt = strtolower(end($fileExt));
+                        $fileActualExt = display_pic($_SESSION['userId']);
 
                         echo '<img src="uploads/profile' . $id . '.' . $fileActualExt . '?' . mt_rand() . '" alt="Profile Image">';
                     } else {

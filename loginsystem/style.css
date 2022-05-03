@@ -247,6 +247,7 @@ header a{
 }
 
 .received {
+    width: fit-content;
     max-width: 45%;
     background-color: #000012;
     color: #cccccc;
@@ -256,6 +257,8 @@ header a{
 }
 
 .sent {
+    width: fit-content;
+    align-self: flex-end;
     max-width: 45%;
     background-color:#cccccc;
     justify-content: flex-end;
