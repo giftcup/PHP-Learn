@@ -129,36 +129,8 @@ include 'header.php';
             $messages = mysqli_stmt_get_result($stmt);
             $num_of_messages = mysqli_num_rows($messages);
 
-            // $msg = mysqli_fetch_all($messages);
-
-            // $msg = sort_messages($msg);
-            // $num_messages = sizeof($msg);
-            // echo '<br><br><br>';
-            // print_r($msg);
-
             if ($num_of_messages > 0) {
-                // for ($i = 0; $i < $num_messages; $i++) {
-                //     if ($uid == $msg[$i][0]) {
-                //         echo '
-                //         <div class="sent">
-                //             <p>' . stripcslashes($msg[$i][2]) . '</p>
-                //         </div>
-                //         ';
-                //     } else if ($uid == $msg[$i][1]) {
-                //         echo '
-                //         <div class="received">
-                //             <p>' . stripcslashes($msg[$i][2]) . '</p>
-                //         </div>
-                //         ';
-                //     }
-                // }
                 while ($message_row = mysqli_fetch_assoc($messages)) {
-                    // echo '
-                    // <div class= '.$uid == $message_row[sender_id] : .' "sent" '. ? .' "received" >
-                    //     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac luctus est. Morbi viverra pellentesque enim a interdum. Praesent tincidunt ornare nulla</p>
-                    // </div>
-                    // ';
-
                     if ($uid == $message_row['sender_id']) {
                         echo '
                         <div class="sent">
@@ -180,15 +152,15 @@ include 'header.php';
             ?>
         </div>
         <div class="send-area">
-            <!-- <div class="message-form"> -->
             <form action="includes/send_message.inc.php" method="POST">
                 <input type="hidden" value=<?php echo $fid; ?> name="friend_id">
                 <textarea name="message" id="message"></textarea>
                 <button type="submit" name="send-message" class="send-message"><i class="fas fa-paper-plane"></i></button>
             </form>
-            <!-- </div> -->
         </div>
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+</body>
+
+</html>

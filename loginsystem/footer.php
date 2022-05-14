@@ -1,5 +1,3 @@
-    <footer>
-
-    </footer>
-</body>
-</html>
+<footer>
+    <p>&copy; giftcup <?php echo date('Y');?></p>
+</footer>
