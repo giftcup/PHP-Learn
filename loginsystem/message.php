@@ -28,44 +28,48 @@ include 'header.php';
             $user_id = $_SESSION['userId'];
             $result = get_friends($user_id, $conn);
 
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
+            if (mysqli_num_rows($result) > 0) :
+                while ($row = mysqli_fetch_assoc($result)) :
 
                     $fid = $row['friend_id'];
+            ?>
 
-                    echo '  <a class="user-message" href="./message.php?friendId=' . $fid . '">
-                            <div class="userImg-message"> ';
+                    <a class="user-message" href="./message.php?friendId=<?php echo $fid; ?>">
+                        <div class="userImg-message">
 
-                    $resultImg = get_picture($fid, $conn);
+                            <?php
+                            $resultImg = get_picture($fid, $conn);
 
-                    if (mysqli_num_rows($resultImg) == 1) {
-                        $rowImg = mysqli_fetch_assoc($resultImg);
-                        $fileActExt = display_pic($fid);
+                            if (mysqli_num_rows($resultImg) == 1) :
+                                $rowImg = mysqli_fetch_assoc($resultImg);
+                                $fileActExt = display_pic($fid);
 
-                        if ($rowImg['status'] == 1) {
-                            echo '<img src="uploads/profile' . $fid . '.' . $fileActExt . '?' . mt_rand() . '" alt="profile_image">';
-                        } else {
-                            echo '<img src="uploads/profiledefault.jpg" alt="profile_image">';
-                        }
-                    }
-                    echo  '</div>';
+                                if ($rowImg['status'] == 1) :
+                            ?>
+                                    <img src="<?php 'uploads/profile' . $fid . '.' . $fileActExt . '?' . mt_rand() ?>" alt="profile_image">';
+                                <?php else : ?>
+                                    <img src="uploads/profiledefault.jpg" alt="profile_image">';
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
 
-                    $resultsFriends = get_user($fid, $conn);
-                    $numOfResults = mysqli_num_rows($resultsFriends);
+                        <?php
+                        $resultsFriends = get_user($fid, $conn);
+                        $numOfResults = mysqli_num_rows($resultsFriends);
 
-                    if ($numOfResults > 1) {
-                        echo "An error occured. Blocking process...";
-                        exit();
-                    }
-                    $row = mysqli_fetch_assoc($resultsFriends);
-
-                    echo '   <div class="userInfo-message">
-                                <h4>' . $row['uname'] . '</h4>
-                                <p class="last-message">Lorem ipsum dolor sit amet consectetur</p>
-                            </div>
-                        </a>';
-                }
-            }
+                        if ($numOfResults > 1) :
+                            echo "An error occured. Blocking process...";
+                            exit();
+                        endif;
+                        $row = mysqli_fetch_assoc($resultsFriends);
+                        ?>
+                        <div class="userInfo-message">
+                            <h4><?php $row['uname'] ?></h4>
+                            <p class="last-message">Lorem ipsum dolor sit amet consectetur</p>
+                        </div>
+                    </a>';
+            <?php endwhile;
+            endif;
             ?>
         </div>
 
@@ -76,23 +80,24 @@ include 'header.php';
             <div class="userImg">
                 <?php
 
-                if (!isset($_GET['friendId'])) {
-                } else {
+                if (!isset($_GET['friendId'])) :
+                else :
                     $fid = $_GET['friendId'];
 
                     $resultImg = get_picture($fid, $conn);
 
-                    if (mysqli_num_rows($resultImg) == 1) {
+                    if (mysqli_num_rows($resultImg) == 1) :
                         $rowImg = mysqli_fetch_assoc($resultImg);
                         $fileActExt = display_pic($fid);
 
-                        if ($rowImg['status'] == 1) {
-                            echo '<img src="uploads/profile' . $fid . '.' . $fileActExt . '?' . mt_rand() . '" alt="profile_image">';
-                        } else {
-                            echo '<img src="uploads/profiledefault.jpg" alt="profile_image">';
-                        }
-                    }
-                }
+                        if ($rowImg['status'] == 1) :
+                ?>
+                            <img src="<?php echo 'uploads/profile' . $fid . '.' . $fileActExt . '?' . mt_rand() ?>" alt="profile_image">
+                        <?php else : ?>
+                            <img src="uploads/profiledefault.jpg" alt="profile_image">  
+                <?php endif;
+                    endif;
+                endif;
                 ?>
             </div>
             <p class="uname">
@@ -100,10 +105,10 @@ include 'header.php';
                 $resultUser = get_user($fid, $conn);
                 $numOfResults = mysqli_num_rows($resultUser);
 
-                if ($numOfResults > 1) {
+                if ($numOfResults > 1) :
                     echo "An error occured. Blocking process...";
                     exit();
-                }
+                endif;
                 $row = mysqli_fetch_assoc($resultUser);
 
                 echo $row['uname'];
@@ -119,35 +124,33 @@ include 'header.php';
             $sql = "SELECT * FROM message WHERE (sender_id=? AND receiver_id=?) OR (sender_id=? AND receiver_id=?) ORDER BY time_sent";
             $stmt = mysqli_stmt_init($conn);
 
-            if (!(mysqli_stmt_prepare($stmt, $sql))) {
+            if (!(mysqli_stmt_prepare($stmt, $sql))) :
                 echo "SQL FAILURE";
                 header('Location: message.php?fail=sql');
-            }
+            endif;
 
             mysqli_stmt_bind_param($stmt, 'ssss', $uid, $fid, $fid, $uid);
             mysqli_stmt_execute($stmt);
             $messages = mysqli_stmt_get_result($stmt);
             $num_of_messages = mysqli_num_rows($messages);
 
-            if ($num_of_messages > 0) {
-                while ($message_row = mysqli_fetch_assoc($messages)) {
-                    if ($uid == $message_row['sender_id']) {
-                        echo '
+            if ($num_of_messages > 0) :
+                while ($message_row = mysqli_fetch_assoc($messages)) :
+                    if ($uid == $message_row['sender_id']) :
+            ?>
                         <div class="sent">
-                            <p>' . stripcslashes($message_row['messages']) . '</p>
+                            <p> <?php stripcslashes($message_row['messages']) ?></p>
                         </div>
-                        ';
-                    } else if ($uid == $message_row['receiver_id']) {
-                        echo '
+                    <?php elseif ($uid == $message_row['receiver_id']) : ?>
                         <div class="received">
-                            <p>' . stripcslashes($message_row['messages']) . '</p>
+                            <p> <?php stripcslashes($message_row['messages']) ?></p>
                         </div>
-                        ';
-                    }
-                }
-            } else {
-                echo '<h1>No messages</h1>';
-            }
+                <?php endif;
+                endwhile;
+            else :
+                ?>
+                <h1>No messages</h1>
+            <?php endif; ?>
 
             ?>
         </div>
@@ -160,7 +163,6 @@ include 'header.php';
         </div>
     </div>
 </main>
-
 </body>
 
 </html>

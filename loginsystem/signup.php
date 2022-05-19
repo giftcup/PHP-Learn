@@ -8,52 +8,56 @@ require 'header.php';
             <h1 class="input-page-head">Signup</h1>
             <form action="includes/signup.inc.php" method="post" class="input-form">
                 <?php
-                if (isset($_GET['signup'])) {
+                if (isset($_GET['signup'])) :
                     $signupVal = $_GET['signup'];
-                }
+                endif;
 
-                if (!isset($_GET['uid'])) {
-                    echo  '<input type="text" name="uid" placeholder="Username">';
-                } else {
-                    $uid = $_GET['uid'];
-                    echo '<input type="text" name="uid" value="' . $uid . '">';
-                    if ($signupVal == "userNameTaken") {
-                        echo '<p class="perror">User name unavailable</p>';
-                    }
-                }
-                if (!isset($_GET['mail'])) {
-                    echo  '<input type="text" name="mail" placeholder="E-mail">';
-                } else {
-                    $mail = $_GET['mail'];
-                    echo '<input type="text" name="mail" value="' . $mail . '">';
-                    if ($signupVal == "emailRegistered") {
-                        echo '<p class="perror">There is an account with this email already</p>';
-                    }
-                }
+                if (!isset($_GET['uid'])) :
                 ?>
+                    <input type="text" name="uid" placeholder="Username">
+                <?php else :
+                    $uid = $_GET['uid'];
+                ?>
+                    <input type="text" name="uid" value=" <?php echo $uid; ?>">
+                    <?php if ($signupVal == "userNameTaken") : ?>
+                        <p class="perror">User name unavailable</p>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <?php if (!isset($_GET['mail'])) : ?>
+                    <input type="text" name="mail" placeholder="E-mail">
+                <?php else : $mail = $_GET['mail']; ?>
+                    <input type="text" name="mail" value="<?php echo $mail; ?>">
+                    <?php if ($signupVal == "emailRegistered") : ?>
+                        <p class="perror">There is an account with this email already</p>
+                    <?php endif; ?>
+                <?php endif; ?>
                 <input type="password" name="pwd" placeholder="Password">
                 <input type="password" name="pwd-repeat" placeholder="Confirm password">
                 <button type="submit" name="signup-submit" class="submit-button"> Signup </button>
             </form>
             <section class="error">
                 <?php
-                if (isset($_GET['signup'])) {
+                if (isset($_GET['signup'])) :
                     $signupVal = $_GET['signup'];
 
-                    if ($signupVal == "nomatch") {
-                        echo '<p>Passwords do not match!!</p>';
-                        exit();
-                    } else if ($signupVal == "empty") {
-                        echo '<p>Fill up all fields!</p>';
-                        exit();
-                    } else if ($signupVal == "email") {
-                        echo '<p>Incorrect format for email!</p>';
-                        exit();
-                    } else if ($signupVal == "error") {
-                        echo '<p>Submit the form!!!</p>';
-                        exit();
-                    }
-                }
+                    if ($signupVal == "nomatch") :
+                ?>
+                        <p>Passwords do not match!!</p>
+                        <?php exit();
+                    elseif ($signupVal == "empty") :
+                        ?>
+                        <p>Fill up all fields!</p>
+                        <?php exit();
+                    elseif ($signupVal == "email") :
+                        ?>
+                        <p>Incorrect format for email!</p>
+                        <?php exit();
+                    elseif ($signupVal == "error") :
+                        ?>
+                        <p>Submit the form!!!</p>
+                        <?php exit();
+                    endif;
+                endif;
                 ?>
             </section>
         </section>

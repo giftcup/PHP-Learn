@@ -22,10 +22,10 @@ require 'includes/get_users.inc.php';
             <ul class="ul-nav-header">
                 <li class="ul-nav-header-li"><a href="index.php">Home</a></li>
                 <?php
-                if (isset($_SESSION['userId'])) {
-                    echo '<li class="ul-nav-header-li"><a href="message.php">Messages</a></li>';
-                }
-                ?>
+                if (isset($_SESSION['userId'])) : ?>
+                    <li class="ul-nav-header-li"><a href="message.php">Messages</a></li>
+                <?php endif; ?>
+
                 <li class="ul-nav-header-li"><a href="./about.php">About Me</a></li>
                 <li class="ul-nav-header-li"><a href="./contacts.php">Contacts</a></li>
             </ul>
@@ -33,31 +33,28 @@ require 'includes/get_users.inc.php';
 
                 <?php
 
-                if (isset($_SESSION['userName']) && isset($_SESSION['userId'])) {
-                    echo '<div class="profile">';
-                    $id = $_SESSION['userId'];
-                    $img = $_SESSION['userImage'];
+                if (isset($_SESSION['userName']) && isset($_SESSION['userId'])) : ?>
+                    <div class="profile">
+                        <?php
+                        $id = $_SESSION['userId'];
+                        $img = $_SESSION['userImage'];
 
+                        if ($img === 1) :
+                            $fileActualExt = display_pic($_SESSION['userId']); ?>
 
-                    if ($img === 1) {
-                        $fileActualExt = display_pic($_SESSION['userId']);
-
-                        echo '<img src="uploads/profile' . $id . '.' . $fileActualExt . '?' . mt_rand() . '" alt="Profile Image">';
-                    } else {
-                        echo '<img src="uploads/profiledefault.jpg" alt="Profile Image">';
-                    }
-                    echo '<p>' . $_SESSION['userName'] . '</p>';
-                    echo '</div>';
-                    echo '
-                        <form action="includes/logout.inc.php" method="post" class="logout-button">
-                        <button type="submit" name="logout-submit"  class="submit-button">Logout</button>
-                        </form>';
-                } else {
-                    echo '<a href="login.php">Login</a>
-                          <a href="signup.php">Signup</a>';
-                }
-
-                ?>
+                            <img src="<?php echo 'uploads/profile' . $id . '.' . $fileActualExt . '?' . mt_rand() ?>" alt="Profile Image">
+                        <?php else : ?>
+                            <img src="uploads/profiledefault.jpg" alt="Profile Image">
+                        <?php endif; ?>
+                        <p><?php echo $_SESSION['userName']; ?></p>
+                    </div>
+                    <form action="includes/logout.inc.php" method="post" class="logout-button">
+                        <button type="submit" name="logout-submit" class="submit-button">Logout</button>
+                    </form>
+                <?php else : ?>
+                    <a href="login.php">Login</a>
+                    <a href="signup.php">Signup</a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>

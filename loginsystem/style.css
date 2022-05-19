@@ -328,6 +328,7 @@ i {
 }
 
 .send-message {
+    color: #fff;
     margin: 1em 1em 1em 0;
     background: unset;
     border: none;
